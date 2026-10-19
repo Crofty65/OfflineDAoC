@@ -12,6 +12,8 @@ The newest version is first. For the full detail of every earlier update, see
   death, when a blow of its own arrived just after the killing blow; the original client never animates a dead body.
 - The new client keeps a log of the spells it sees cast and land around you (spell_log.txt in its save folder, the
   last few hundred lines), to attach to a bug report when a spell's animation or effect doesn't show.
+- A spell at a target you can't see (behind a wall or a hill) is refused at once with "You can't see your target
+  from here!", as in the original client. It used to cast in full and only then fail with that message.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
