@@ -37,6 +37,8 @@ The newest version is first. For the full detail of every earlier update, see
   last few hundred lines), to attach to a bug report when a spell's animation or effect doesn't show.
 - A spell at a target you can't see (behind a wall or a hill) is refused at once with "You can't see your target
   from here!", as in the original client. It used to cast in full and only then fail with that message.
+- Ghostly characters (Spiritmaster spirits, ghost NPCs) keep their hair from every angle. Part of it vanished
+  depending on where you looked from, so a ghostly dwarf's braided head looked bald from the front.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
