@@ -51,6 +51,8 @@ The newest version is first. For the full detail of every earlier update, see
   because they had been built with the animations of the wolf puppy pets, which look the same but have no death.
   Every monster now plays its own animation set, which also gives the Labyrinth's living Undead Minotaur its own
   moves (it had the dead one's), and Fomorians and Red Caps with and without weapons their own.
+- A buff overridden by a stronger one of its kind (and an immunity) shows tinted red on your effects bar, as in
+  the original client. Both used to look active.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
