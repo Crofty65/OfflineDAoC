@@ -53,6 +53,14 @@ The newest version is first. For the full detail of every earlier update, see
   moves (it had the dead one's), and Fomorians and Red Caps with and without weapons their own.
 - A buff overridden by a stronger one of its kind (and an immunity) shows tinted red on your effects bar, as in
   the original client. Both used to look active.
+- Weapons you aren't using stay on you, as in the original client: a two-hander rides on your back while you
+  fight with one hand and a shield, and a one-hander hangs at your belt while you use your two-hander or bow.
+  Shields, bows, staves and polearms you aren't using are put away out of sight.
+- Sheathed weapons hang the way the original client hangs them: a two-hander's hilt comes up over your left shoulder
+  with the blade down your back under the cloak, and one-handers hang head down at the belt. They used to hang out
+  across the cloak.
+- A cloak covers the spiked shoulder pieces of some chain chests (on Kobolds most of all), which came through the
+  cloak's inner edges when standing still.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
