@@ -39,6 +39,14 @@ The newest version is first. For the full detail of every earlier update, see
   from here!", as in the original client. It used to cast in full and only then fail with that message.
 - Ghostly characters (Spiritmaster spirits, ghost NPCs) keep their hair from every angle. Part of it vanished
   depending on where you looked from, so a ghostly dwarf's braided head looked bald from the front.
+- Robes hang as long robes, as in the original client. They were drawn on the vest body with sleeves and trousers
+  showing under them (a troll Bonedancer's robe looked like a striped tunic). Now a robe uses the long robe body,
+  with the arms and legs (and a Highlander's kilt) hidden and shorter boots and gloves, and every other armour piece
+  takes the body, boot or glove shape its item names (its extension), where everything used to fall back to the
+  first shape.
+- Helms and hats wear their own material. The Norse Cloth Cap that many cloth casters wear showed a sheet of
+  chain and scales; it is padded leather again, as are 23 other helms that had the same wrong texture (Celtic cloth,
+  reinforced and scale caps, the tiaras, some guard helms).
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
