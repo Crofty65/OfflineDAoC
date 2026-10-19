@@ -7,6 +7,12 @@ The newest version is first. For the full detail of every earlier update, see
 
 0.37 / 0.37b / 0.37c is the latest release.
 
+**Bots and raids**
+- Hibernian bots no longer get stuck at the door of their portal keep in Odin's Gate. Once out of the keep's
+  inner door, the route they planned led back in to the keep yard and then out again, over and over, until they
+  gave up and went home (47 bots and 292 give-ups in one test run). A planned route no longer starts by going back
+  through a door the bot has just come out of when that leads no nearer its goal.
+
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
   death, when a blow of its own arrived just after the killing blow; the original client never animates a dead body.
