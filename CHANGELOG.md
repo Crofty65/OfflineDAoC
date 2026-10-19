@@ -3,6 +3,14 @@
 The newest version is first. For the full detail of every earlier update, see
 [docs/history/CHANGELOG-0.3-to-0.32b.md](docs/history/CHANGELOG-0.3-to-0.32b.md).
 
+## 0.38 / 0.38b / 0.38c (not released yet)
+
+0.37 / 0.37b / 0.37c is the latest release.
+
+**The new client (0.38c)**
+- A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
+  death, when a blow of its own arrived just after the killing blow; the original client never animates a dead body.
+
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
 The first version that comes as an update to 0.36: the overview is in [docs/RELEASE-0.37.md](docs/RELEASE-0.37.md);
