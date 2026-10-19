@@ -607,8 +607,11 @@ func _on_world_inner(kind: String, d: Dictionary) -> void:
 					# a concentration / permanent effect: no time shown (the server sends its endless duration as ~18 h,
 					# 65535 s; owner 2026-10-11: no time for those) - nothing timed runs that long
 					var timed := int(e.seconds) > 0 and int(e.seconds) < NO_TIME_SECONDS
+					# its third byte: 1 = an immunity, or a buff another one overrides (the server's IsDisabled) - the old
+					# client draws it tinted red (owner 2026-10-19)
 					effects[int(e.index)] = {"icon": int(e.icon), "name": String(e.name), "negative": int(e.negative),
-							"until": Time.get_ticks_msec() + int(e.seconds) * 1000 if timed else 0}
+							"until": Time.get_ticks_msec() + int(e.seconds) * 1000 if timed else 0,
+							"disabled": (int(e.get("immune", 0)) & 1) != 0}
 			PlayerData.effects_changed.emit()
 		"map_marker":
 			map_markers[int(d.id)] = Vector4(float(d.region), float(d.x), float(d.y), float(d.z))
@@ -1101,7 +1104,8 @@ func effects_list() -> Array:
 		var e: Dictionary = effects[k]
 		var ic := skill_icon("spell", int(e.icon))
 		out.append({"icon": int(ic[0]), "border": int(ic[1]), "name": String(e.name), "fx": int(e.icon),
-				"seconds": maxf(0.001, (int(e.until) - now) / 1000.0) if int(e.until) > 0 else 1e9})
+				"seconds": maxf(0.001, (int(e.until) - now) / 1000.0) if int(e.until) > 0 else 1e9,
+				"disabled": bool(e.get("disabled", false))})
 	return out
 
 
