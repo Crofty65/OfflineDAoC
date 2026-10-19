@@ -473,6 +473,14 @@ def main():
         (OUT / 'monsters.json').write_text(json.dumps(out_meta, indent=1), encoding='utf-8')
         print(sum(1 for e in out_meta.values() if e.get('effects')), 'models with effects,', len(new_effects), 'effects')
         return
+    # model folder -> the anim set it holds: that of the lowest model number listed in it (see the key below)
+    owners = {}
+    for m in sorted(out_meta, key=lambda x: (int(x) & 0x7FFF, int(x))):
+        mr = mon.get(str(int(m) & 0x7FFF))
+        nr = nifs.get(mr[2].strip()) if mr else None
+        folder = str(out_meta[m].get('gltf', '')).rsplit('/', 2)[-2] if out_meta[m].get('gltf') else ''
+        if folder and nr is not None:
+            owners.setdefault(folder, nr[3].strip())
     listed = next((a.split('=')[1].split(',') for a in sys.argv if a.startswith('--models=')), None)   # e.g. route mounts
     for model in (listed if listed else pet_models() if '--pets' in sys.argv else zone_models(zone)):
         mr = mon.get(str(int(model) & 0x7FFF))           # the server sets a high flag bit on some (32891 = 0x8000 | 123)
@@ -517,6 +525,14 @@ def main():
                     lk['base'], lk['dark'] = lk['dark'], None
         tex = body_tex(looks, body)
         key = look_key(fig, tex, looks)
+        # the clips are the model's own anim set (monnifs column 3): two models drawn alike but animated by different
+        # sets get a folder each (owner 2026-10-19: Snow Wolves died standing - the "puppy" pets, the same wolf figure
+        # and snow skin on anim set 221 whose Death is the idle, were built into wolf__wolf_snow after the Snow Wolf's
+        # set 7 with its wlf_deth; also the living Undead Minotaur in the dead one's set, Fomorians / Red Caps with and
+        # without weapons). The folder's owner is its lowest model number; another set gets "__a<set>".
+        anim_set = nr[3].strip()
+        if owners.setdefault(key, anim_set) != anim_set:
+            key += f'__a{anim_set}'
         entry['gltf'] = f'res://content/monsters/{key}/model.gltf'
         entry['skin'] = tex
         if key not in built:
