@@ -30,6 +30,11 @@ The newest version is first. For the full detail of every earlier update, see
 - Albion bots no longer get sent home to Camelot from beside their portal keep in Odin's Gate. A walled-in floor just
   south of the keep joins nothing; bots that ended up on it now step back into the keep yard and go on.
 
+**World**
+- The Huntsmen and Woodsmen of Campacorentin Forest patrol the roads in pairs again instead of standing still. Period
+  sightings show a Huntsman and a Woodsman together all along the forest's main roads; each Huntsman now walks one
+  stretch of road up and down with a Woodsman at his side, along the same road the horse routes take.
+
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
   death, when a blow of its own arrived just after the killing blow; the original client never animates a dead body.
