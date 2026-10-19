@@ -502,7 +502,11 @@ static func _ghost_shader(src: Shader) -> Array:
 		var code := String(src.code)
 
 		var mode := RegEx.create_from_string("render_mode [^;]*;")
-		var d := mode.sub(code, "render_mode blend_mix, depth_draw_always, cull_back, shadows_disabled;")
+		# hair stays double-sided (the cutout shader is hair's only): fig3parts.csv marks nearly every hair style Double
+		# Sided, and culled its back half went - a ghostly dwarf's braided head looked bald from the front (owner
+		# 2026-10-19, a spirit champion). The depth pass still keeps only the nearest layer, so nothing shows through
+		var cull := "cull_disabled" if code.contains("ALPHA_SCISSOR_THRESHOLD") else "cull_back"
+		var d := mode.sub(code, "render_mode blend_mix, depth_draw_always, %s, shadows_disabled;" % cull)
 		# its depth a hair behind the surface (reverse Z: smaller is farther; x 0.9993): the two passes are different
 		# shaders, so their depths for the same face differ by rounding, and the colour pass flickered in and out as the
 		# camera turned (owner 2026-10-15). 0.3 % let what lies a few cm behind the skin - the eyes, the inside of the
@@ -517,7 +521,7 @@ static func _ghost_shader(src: Shader) -> Array:
 		# hair takes its texture alpha (its coverage); on faces the alpha is gloss and on clothes the tint mask, and as
 		# opacity it left skin and dyed armour the most see-through - no skin or armour colour under the ghost (owner
 		# 2026-10-16, after the 2026-10-15 texture-alpha pass)
-		var l := mode.sub(code, "render_mode blend_mix, depth_draw_never, cull_back, shadows_disabled;
+		var l := mode.sub(code, ("render_mode blend_mix, depth_draw_never, %s, shadows_disabled;" % cull) + "
 uniform float ghost_alpha = 0.9;
 uniform float ghost_white = 0.0;")
 		l = l.replace("ALPHA = c.a;
