@@ -12,6 +12,14 @@ The newest version is first. For the full detail of every earlier update, see
   inner door, the route they planned led back in to the keep yard and then out again, over and over, until they
   gave up and went home (47 bots and 292 give-ups in one test run). A planned route no longer starts by going back
   through a door the bot has just come out of when that leads no nearer its goal.
+- Bots no longer fight things a player can't target. In Galladoria the Corrupt Primal of Fire leaves short-lived
+  patches of fire behind it (they can't be targeted, resist nearly everything and burn out in six seconds), and
+  nearly the whole raid by the Earthmenders was swinging at them instead of the Earthmenders and the primal; the
+  Fire primal was given up at 99%.
+- When only a handful of a raid fight its current target while many stand around it, up to a third of those already
+  busy with something else now switch to it as well. Before, only idle raiders were called over until the target had
+  gone untouched for three minutes, which never happens while a few keep chipping at it (Galladoria's Magical
+  Earthmender: 2 of 207 raiders on it).
 
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
