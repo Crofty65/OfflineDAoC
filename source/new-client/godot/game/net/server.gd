@@ -337,8 +337,12 @@ static func _overview_gear(nm: String, c: Dictionary) -> Dictionary:
 		# PacketLib1125: an item's guild emblem in its colour's place (owner 2026-10-17: no emblems on the select
 		# screen) - a dye is 0-143 (tints.csv), more is the emblem
 		var tex := int(colors.get(k, 0))
+		# the chest's, gloves' and boots' extensions (their meshes, Fig3Figure.item_armor): PacketLib1125's two
+		# bytes, boots << 4 | gloves and torso << 4 | hood
+		var ext := int({22: int(c.get("ext_boots_gloves", 0)) & 0xF, 23: int(c.get("ext_boots_gloves", 0)) >> 4,
+				25: int(c.get("ext_torso_hood", 0)) >> 4}.get(slots[k], 0))
 		ItemDb.add_runtime(id, {"id": id, "name": "", "model": m, "object_type": 42 if shield else 0, "hand": 0,
-				"color": tex if tex <= 0xFF else 0, "emblem": tex if tex > 0xFF else 0})
+				"color": tex if tex <= 0xFF else 0, "emblem": tex if tex > 0xFF else 0, "extension": ext})
 		inv[str(slots[k])] = {"id": id, "count": 1}
 	return inv
 

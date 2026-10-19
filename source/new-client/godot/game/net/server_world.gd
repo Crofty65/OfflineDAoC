@@ -677,7 +677,8 @@ func _equip(d: Dictionary) -> void:
 	var rows := []
 	for it in d.get("items", []):
 		rows.append({"slot": int(it.slot), "model": int(it.model), "color": int(it.get("color", 0)),
-				"effect": int(it.get("effect", 0)), "emblem": int(it.get("emblem", 0))})   # (a cloak / shield's guild emblem)
+				"effect": int(it.get("effect", 0)), "emblem": int(it.get("emblem", 0)),     # (a cloak / shield's guild emblem)
+				"extension": int(it.get("extension", 0))})                 # (an armour piece's mesh: Fig3Figure.item_armor)
 	var st: NpcState = by_oid.get(oid)
 	var gear := {"hood": (int(d.get("hood", 0)) & 1) != 0, "cloak_hidden": (int(d.get("hidden", 0)) & 1) != 0,
 			"helm_hidden": (int(d.get("hidden", 0)) & 2) != 0}

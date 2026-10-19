@@ -114,11 +114,14 @@ def main():
             missing.append((model, 'no objects.csv row'))
             continue
         # its texture: the Catacombs texture column (the layout the Catacombs helm's UVs use - for the Gandalf hats
-        # b_hat01.dds: cone, brim ring, crown ring and the edge band), else the classic Apply Texture (column 22) -
+        # b_hat01.dds: cone, brim ring, crown ring and the edge band), else the item's Helm skin (column 12) - as
+        # game.dll dresses a Catacombs helm (0x4221ea: the Helm skin, replaced by the Cata Helm Texture when set; it
+        # never reads Apply Texture, column 22, which names the mesh's base atlas: owner 2026-10-19, the Norse Cloth
+        # Cap and 23 more drew N_helm's chain and scales instead of their padded / cloth / reinforced skins) -
         # taken from the exact pskins archive the row names (pskin042.mpk ...): other archives hold same-named copies
         # in the classic layout (owner 2026-10-11: the hat's band was missing / misplaced)
         tex, tex_row = '', None
-        for col in (tex_col, 22):
+        for col in (tex_col, 12):
             if not tex and len(o) > col and o[col].strip() not in ('', '0') and o[col].strip() in pskins:
                 tex_row = pskins[o[col].strip()]
                 tex = tex_row[2].rsplit('.', 1)[0].lower() + (f'__a{int(tex_row[4])}' if tex_row[4].strip().isdigit() else '')
