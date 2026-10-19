@@ -279,6 +279,7 @@ func _apply_cloak() -> void:
 		var dyed: Color = armor_tints.get("cloak", Color.WHITE)
 		m.set_shader_parameter("tint", dyed)
 		m.set_shader_parameter("tint_mode", 1 if dyed != Color.WHITE else 0)
+		m.set_shader_parameter("view_pull", CLOAK_PULL)
 		# a guild emblem in place of the dye (the server sends one or the other; owner 2026-10-17: guild gamebots)
 		m.set_shader_parameter("has_emblem", cloak_emblem > 0)
 		if cloak_emblem > 0:
@@ -290,6 +291,9 @@ func _apply_cloak() -> void:
 			mi.material_override = m
 	_apply_full_helm()
 	_refresh_hair()
+
+
+const CLOAK_PULL := 1.0                     # NIF units (the figure shader's view_pull)
 
 
 ## Hood up (with the cloak showing) or a helm that covers the hair: the hair isn't drawn.
@@ -682,10 +686,21 @@ uniform sampler2D pattern_tex : filter_linear, repeat_enable;
 uniform sampler2D logo_tex : filter_linear_mipmap, repeat_disable;
 uniform bool has_emblem = false;
 uniform bool has_logo = false;
+// a cloak drawn this far (in the figure's own NIF units) toward the camera: the spiked pauldrons of some chest meshes
+// (Kobold body 3 / 5) come 0.15 - 0.4 units through the cloak's inner edges in the idle, where the old client shows
+// the cloak over them (owner 2026-10-19); 0 = drawn where it is
+uniform float view_pull = 0.0;
 varying vec2 logo_uv;
 
 void vertex() {
 	logo_uv = CUSTOM0.xy;
+	// (POSITION written on every path: a shader that writes it anywhere no longer gets the default projection - the
+	// unpulled parts, body and head, were left unplaced and the character went invisible, owner 2026-10-19)
+	vec4 vp = MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
+	if (view_pull > 0.0) {
+		vp.xyz -= normalize(vp.xyz) * view_pull * length(MODELVIEW_MATRIX[0].xyz);
+	}
+	POSITION = PROJECTION_MATRIX * vp;
 }
 
 void fragment() {
