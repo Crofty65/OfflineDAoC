@@ -20,6 +20,15 @@ The newest version is first. For the full detail of every earlier update, see
   busy with something else now switch to it as well. Before, only idle raiders were called over until the target had
   gone untouched for three minutes, which never happens while a few keep chipping at it (Galladoria's Magical
   Earthmender: 2 of 207 raiders on it).
+- The patches of fire Galladoria's Corrupt Primal of Fire leaves behind hit for less: 120 heat damage in a 300 radius
+  every 2 seconds (was 220 in a 450 radius).
+- Siege armies' healers go out to their dead. A fallen attacker now waits for a raise while one of its army's healers
+  is within 5,000 (it was 2,000; with nobody that close it released after 20 seconds and walked back from its portal
+  keep, about 185,000 units at Dun Dagda), healers out of the fight walk out to the dead on the field, and the realm's
+  other RvR healers at the battle raise them too. At Dun Dagda most attackers fall on the slopes 3,000 to 4,500 below
+  the keep, out of reach of the healers at the gate.
+- Albion bots no longer get sent home to Camelot from beside their portal keep in Odin's Gate. A walled-in floor just
+  south of the keep joins nothing; bots that ended up on it now step back into the keep yard and go on.
 
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
