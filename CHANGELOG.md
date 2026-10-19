@@ -10,6 +10,8 @@ The newest version is first. For the full detail of every earlier update, see
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
   death, when a blow of its own arrived just after the killing blow; the original client never animates a dead body.
+- The new client keeps a log of the spells it sees cast and land around you (spell_log.txt in its save folder, the
+  last few hundred lines), to attach to a bug report when a spell's animation or effect doesn't show.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
