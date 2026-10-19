@@ -47,6 +47,10 @@ The newest version is first. For the full detail of every earlier update, see
 - Helms and hats wear their own material. The Norse Cloth Cap that many cloth casters wear showed a sheet of
   chain and scales; it is padded leather again, as are 23 other helms that had the same wrong texture (Celtic cloth,
   reinforced and scale caps, the tiaras, some guard helms).
+- Snow wolves (savage winterwolves and the like) fall over when they die. They stood on in their idle pose,
+  because they had been built with the animations of the wolf puppy pets, which look the same but have no death.
+  Every monster now plays its own animation set, which also gives the Labyrinth's living Undead Minotaur its own
+  moves (it had the dead one's), and Fomorians and Red Caps with and without weapons their own.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
