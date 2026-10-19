@@ -348,6 +348,11 @@ func _add_npc(d: Dictionary) -> void:
 		_remove(oid, false)
 	var f := int(d.flags)
 	var f2 := int(d.flags2)
+	# no 0x02 (PacketLib1124: "mob has equipment ... the 0xBD packet" follows): this living has none - not the gear of
+	# whatever had this object id before (owner 2026-10-19: a necroservant, which has no inventory, showed the two-handed
+	# sword of an abomination released before it)
+	if f & 0x02 == 0:
+		data.equipment.erase("srv%d" % oid)
 	# the packet's flags -> the database's eFlags (what Npc / NamePlates read)
 	var flags := 0
 	if f & 0x01: flags |= 0x01                                  # ghost
