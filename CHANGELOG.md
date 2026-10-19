@@ -61,6 +61,8 @@ The newest version is first. For the full detail of every earlier update, see
   across the cloak.
 - A cloak covers the spiked shoulder pieces of some chain chests (on Kobolds most of all), which came through the
   cloak's inner edges when standing still.
+- A Necromancer's necroservant no longer shows up carrying a two-handed sword. A creature with no gear of its own
+  could show the weapons of whatever had been in its place before (an abomination's sword after switching pets).
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
