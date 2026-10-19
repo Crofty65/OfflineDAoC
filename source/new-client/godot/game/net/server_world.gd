@@ -1190,10 +1190,43 @@ func _sounds_of(v: Node) -> CharacterSounds:
 	return null
 
 
+## The spell log (owner 2026-10-19: a /spawn bonedancer's pet buffs - "didn't see shield", two casts with no
+## animation): every cast and landing the server sends, with what the client did - user://spell_log.txt, the last
+## SPELL_LOG_MAX lines, written every few seconds.
+const SPELL_LOG_MAX := 600
+var _spell_log: Array = []
+var _spell_log_due := false
+
+
+func _slog(line: String) -> void:
+	_spell_log.append("%s %s" % [Time.get_time_string_from_system(), line])
+	if _spell_log.size() > SPELL_LOG_MAX:
+		_spell_log = _spell_log.slice(_spell_log.size() - SPELL_LOG_MAX)
+	if not _spell_log_due and is_inside_tree():
+		_spell_log_due = true
+		get_tree().create_timer(3.0).timeout.connect(func():
+			_spell_log_due = false
+			var f := FileAccess.open("user://spell_log.txt", FileAccess.WRITE)
+			if f:
+				f.store_string("
+".join(_spell_log) + "
+")
+				f.close())
+
+
+func _who(oid: int) -> String:
+	if oid == Server.me_oid:
+		return "you"
+	var st: NpcState = by_oid.get(oid)
+	return ("%s#%d" % [String(st.spawn.get("name", "?")), oid]) if st else "?#%d" % oid
+
+
 func _cast(d: Dictionary) -> void:
 	var oid := int(d.caster)
 	var v := _view_of(oid)
 	var ce := int(d.spell)
+	_slog("CAST  %s  %d %s  %.1fs  view=%s" % [_who(oid), ce, String(SpellFx.effect(ce).get("name", "")), int(d.get("time", 0)) / 10.0,
+			"yes" if v else "NOT YET"])
 	SpellFx.prefetch(ce)                                          # its effects load now, on a worker, not as it lands
 	_late_cast.erase(oid)
 	if v == null:
@@ -1280,6 +1313,9 @@ func _spell_effect(d: Dictionary) -> void:
 	var caster := _view_of(int(d.caster)) as Node3D
 	var target := _view_of(int(d.target)) as Node3D
 	var ce := int(d.spell)
+	_slog("LAND  %s -> %s  %d %s  cast=%s  target view=%s  %s" % [_who(int(d.caster)), _who(int(d.target)), ce,
+			String(SpellFx.effect(ce).get("name", "")), "yes" if _gathers.has(int(d.caster)) else "no",
+			"yes" if target else "NOT YET", "resisted" if int(d.success) == 0 else "ok"])
 	_late_cast.erase(int(d.caster))                              # (landed before its caster was drawn: no cast now)
 	var handles: Array = []
 	var g: Array = _gathers.get(int(d.caster), [])

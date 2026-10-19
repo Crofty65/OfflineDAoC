@@ -1573,4 +1573,13 @@ func use(id: String) -> bool:
 	var v := viewer()
 	if v == null:
 		return false
-	return use_entry(id, v.player, current_zone_id(), not PlayerData.target.is_empty())
+	# the cast's "target in view" flag: whether you can see it, as the client worked it out (owner 2026-10-19: a spell at a
+	# target behind a wall cast in full, then "You can't see your target from here!" - the old client is refused at
+	# once). It was "you have a target", so the server's start-of-cast check (SpellHandler: HasLos = TargetInView)
+	# always passed and only the position updates' flag told it otherwise, at the end. A target that isn't a drawn
+	# living (yourself, a door, an object) keeps "a target" - the server's own range rule covers those.
+	var in_view := not PlayerData.target.is_empty()
+	var w = v.get("npcs")
+	if in_view and w is ServerWorld and (w as ServerWorld).target and is_instance_valid((w as ServerWorld).target):
+		in_view = (w as ServerWorld).target_in_view(v.player.global_position)
+	return use_entry(id, v.player, current_zone_id(), in_view)

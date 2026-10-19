@@ -1041,6 +1041,10 @@ func _sink(depth: float) -> void:
 
 
 func _one_shot(clip: String) -> float:
+	# a dead body moves no more: no swing, style, flinch or parry over its death (owner 2026-10-19: an NPC that died
+	# kept attacking a second or two - a blow / hit packet a moment after the death replayed a swing over it)
+	if state and not state.alive:
+		return 0.0
 	clip = clip_for(clip)                                  # (a casting style: this model's own clip for it)
 	if anim == null or not anim.has_animation(clip):
 		return 0.6
