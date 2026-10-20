@@ -118,10 +118,19 @@ The newest version is first. For the full detail of every earlier update, see
   other monsters with the same quirk move more like the original too.
 - Snowdonia Fortress's metal gates (portcullises) open when the levers are pulled. Gates that slide instead of
   swinging never moved; the other border keep gates, Caer Diogel's bars and two stone halls' portcullises open too.
+- The target window's FACE, FOLLOW and STICK buttons work when playing on the server (they answered "No such
+  command"), and pressing the same one again on the same target turns it off, as in the original client. (From the
+  chris4aker/OfflineDAoC-SocialExpansion fork.)
+- /target <name> and /assist fill the target window. The server picked the target, but the client never showed it,
+  so a following /invite found no target. (From the chris4aker/OfflineDAoC-SocialExpansion fork.)
+- Abilities such as Sprint, Stealth and Quickcast can be dragged onto the quickbar, as the skills sheet says.
+  (From the chris4aker/OfflineDAoC-SocialExpansion fork.)
 
 **Credits**
 - Thanks to the [chris4aker/OfflineDAoC-SocialExpansion](https://github.com/chris4aker/OfflineDAoC-SocialExpansion)
-  fork for the fix for groups waiting on members that keep dying on the way to their meetup.
+  fork for the fix for groups waiting on members that keep dying on the way to their meetup, and for three new-client
+  fixes: the FACE / FOLLOW / STICK buttons, the server's target changes (/target, /assist) and abilities on the
+  quickbar.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
