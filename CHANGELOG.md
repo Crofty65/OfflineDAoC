@@ -45,9 +45,6 @@ The newest version is first. For the full detail of every earlier update, see
   melee: they step back from an enemy close to them and heal and raise their army from behind, and fight back only
   when they are hit. They used to fight in the front with everyone else and were always under attack or dead when
   their army fell, so no fallen attacker was ever raised at Dun Dagda.
-- A gamebot that dies stays where it fell, so players and other bots can raise it there. When its brain stopped
-  while it was idle, its body was sent straight back to its spawn point, a few milliseconds after it died.
-  (From the chris4aker/OfflineDAoC-SocialExpansion fork.)
 - A group member that dies three times on its way to the group's meetup point counts as a no-show at once, and
   the group goes on without it, instead of waiting the full fifteen minutes (a low-level group was seen dying
   about 70 times near its meetup during one wait and then being dropped anyway). (From the
@@ -124,8 +121,7 @@ The newest version is first. For the full detail of every earlier update, see
 
 **Credits**
 - Thanks to the [chris4aker/OfflineDAoC-SocialExpansion](https://github.com/chris4aker/OfflineDAoC-SocialExpansion)
-  fork for the fixes for dead gamebots being sent home and for groups waiting on members that keep dying on
-  the way to their meetup.
+  fork for the fix for groups waiting on members that keep dying on the way to their meetup.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
