@@ -252,6 +252,11 @@ static func add_effect(holder: Node3D, effect: int) -> Node3D:
 		return null
 	fx.name = "WeaponEffect"
 	fx.transform = (holder.get_child(0) as Node3D).transform   # the weapon's own frame (TO_NIF / its grip)
+	# the glow rides the blade: its particles live in the weapon's space (owner 2026-10-20: an abomination's and the
+	# gamebots' weapon glows trailed far behind the sword - emitted in world space, each particle stayed where it was
+	# born for its whole life while the blade swung on)
+	for ps in fx.find_children("*", "GPUParticles3D", true, false):
+		(ps as GPUParticles3D).local_coords = true
 	holder.add_child(fx)
 	AnimLod.keep_on_main(fx)                              # (its particles and timeline: the main thread)
 	NifParticles.fit_to_scale(fx)

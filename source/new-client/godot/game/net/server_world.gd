@@ -1369,7 +1369,10 @@ func _spell_effect(d: Dictionary) -> void:
 			if c < anims.size() and String(anims[c]) != "":
 				clip = String(anims[c])
 				break
-		if clip != "" and caster.has_method("_one_shot") and not (caster is Player and (caster as Player).casting_spell):
+		# only a song's instrument (drums / lute / flute): a paladin's chant pulses with no motion (owner 2026-10-20:
+		# "paladins are doing animations for their chants") - as an instant spell shows none (owner 2026-10-15)
+		var instrument := clip.begins_with("cast_drums") or clip.begins_with("cast_lute") or clip.begins_with("cast_flute")
+		if instrument and caster.has_method("_one_shot") and not (caster is Player and (caster as Player).casting_spell):
 			caster.call("_one_shot", clip)
 		SpellFx.sound(_sounds_of(caster), int(SpellFx.effect(ce).get("sound_set", 0)), "gather")
 	# one burst, one sound: the server sends a spell's effect once per target (a group buff on eight: eight packets

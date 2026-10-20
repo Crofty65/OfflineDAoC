@@ -320,6 +320,12 @@ def add_look_maps(gltf_path, looks, texture_uri):
             continue
         if lk['glow']:
             mat['emissiveTexture'] = {'index': texture(lk['glow'])}
+            # on the shape's second UV set when it has one (nif_character.build: TEXCOORD_1) - the client lays the glow
+            # map out there (the Glowing Demon Knight's eye slits); NpcManager turns this into emission_on_uv2
+            mi = g['materials'].index(mat)
+            if any(pr.get('material') == mi and 'TEXCOORD_1' in pr.get('attributes', {})
+                   for me in g.get('meshes', []) for pr in me.get('primitives', [])):
+                mat['emissiveTexture']['texCoord'] = 1
             mat['emissiveFactor'] = [1.0, 1.0, 1.0]
             changed = True
         if lk['gloss']:

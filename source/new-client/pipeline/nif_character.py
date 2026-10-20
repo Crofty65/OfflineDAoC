@@ -392,6 +392,12 @@ def build(model, parts, clips, out_path, texture_uri):
             attrs = {'POSITION': d.acc(pos, 5126, 'VEC3', 34962, True), 'NORMAL': d.acc(nrm, 5126, 'VEC3', 34962),
                      'TEXCOORD_0': d.acc(uv, 5126, 'VEC2', 34962), 'JOINTS_0': d.acc(joints, 5123, 'VEC4', 34962),
                      'WEIGHTS_0': d.acc(weights, 5126, 'VEC4', 34962)}
+            # the shape's next UV set as TEXCOORD_1: a monster's glow map is laid out on it (owner 2026-10-20: the
+            # abomination's - Glowing Demon Knight's - glowing eye sat on its chest armour; its glow map on set 1 covers
+            # the helmet's eye slits, on set 0 the chest); build_monsters.add_look_maps points the glow at it
+            nxt = int(uvs or 0) + 1
+            if len(data['uv_sets']) > nxt and len(data['uv_sets'][nxt]) == len(v):
+                attrs['TEXCOORD_1'] = d.acc(np.asarray(data['uv_sets'][nxt], np.float32)[:, :2], 5126, 'VEC2', 34962)
             d.g['meshes'].append({'name': name, 'primitives': [{'attributes': attrs, 'indices': d.acc(tri.reshape(-1), 5125, 'SCALAR', 34963),
                                                               'material': len(d.g['materials']) - 1}]})
             d.g['nodes'].append({'name': f'{name}_mesh', 'mesh': len(d.g['meshes']) - 1, 'skin': 0})
