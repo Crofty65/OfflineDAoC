@@ -573,7 +573,7 @@ def main():
             built_cast[key] = cast_clips(nr[3], clips) if nr[3].strip().isdigit() else {}
             try:
                 try:
-                    report = nc.build(nif_name, parts, clips, str(d / 'model.gltf'), 'textures/original')
+                    report = nc.build(nif_name, parts, clips, str(d / 'model.gltf'), 'textures/original', file_bind=True)
                 except Exception:
                     extra = [c for c in clips if c in WEAPON_CLIPS.values()]
                     if not built_cast.get(key) and not extra:
@@ -586,7 +586,7 @@ def main():
                     for c in extra:
                         clips.pop(c, None)
                     built_cast[key] = {}
-                    report = nc.build(nif_name, parts, clips, str(d / 'model.gltf'), 'textures/original')
+                    report = nc.build(nif_name, parts, clips, str(d / 'model.gltf'), 'textures/original', file_bind=True)
             except Exception as e:
                 print(model, mr[1], 'BUILD FAILED', type(e).__name__, e)
                 entry['missing'] = f'build failed: {e}'
