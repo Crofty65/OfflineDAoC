@@ -29,6 +29,22 @@ The newest version is first. For the full detail of every earlier update, see
   the keep, out of reach of the healers at the gate.
 - Albion bots no longer get sent home to Camelot from beside their portal keep in Odin's Gate. A walled-in floor just
   south of the keep joins nothing; bots that ended up on it now step back into the keep yard and go on.
+- Bots can now finish Caer Sidi: a bot raid killed the four horsemen and Apocalypse for the first time. The hidden
+  controller that starts the horsemen's challenge only woke up for players, so it never noticed the raid waiting at
+  its trigger (over a hundred bots stood there for half an hour with nothing happening). Hidden encounter controllers
+  now always run, whoever is near.
+- Galladoria's Olcasgean wakes for a bot raid once all four primals are dead. He slept on as a statue, because only his
+  own brain starts the timer that wakes him, and bots never woke a monster that couldn't attack them. Raid bots now
+  wake any scripted encounter boss near them, as a player would.
+- A relic or keep army stays together on the march. When its leader stopped leading, the next one was simply the first
+  marcher on the list, wherever it was; a straggler 64,000 units behind could take over, and the front of the army
+  walked back to it (at Dun Dagda the siege then opened with 62 of 170 attackers there). The new leader is the marcher
+  with most of the army around it. In the next test the army marched in 22 minutes and opened the siege with 161 at
+  the keep.
+- A siege army's healers stay behind the line. Those that can raise the dead no longer pick fights of their own in the
+  melee: they step back from an enemy close to them and heal and raise their army from behind, and fight back only
+  when they are hit. They used to fight in the front with everyone else and were always under attack or dead when
+  their army fell, so no fallen attacker was ever raised at Dun Dagda.
 
 **World**
 - The Huntsmen and Woodsmen of Campacorentin Forest patrol the roads in pairs again instead of standing still. Period
