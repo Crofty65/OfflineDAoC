@@ -76,6 +76,14 @@ The newest version is first. For the full detail of every earlier update, see
 - Shift + right-click on a quickbar slot empties it, as in the original client. Dragging it off the bar still works.
 - Helmets show on every race that can wear them: Briton women, Half Ogres, Frostalfs and Shar had no helmets in
   many sets, and some full helms (the Albion full plate helm) showed on Briton men only.
+- Paladin chants look like the original client: the Refreshment chants' golden chalice appears over each healed
+  group member again (it had been left out of the effect), and chant pulses no longer make the paladin wave their
+  arms. The blessing halo and the Mjolnir and Gungnir effects got their missing parts back too.
+- The Necromancer's abomination (and other glowing demon knights) has its glowing eyes in its helmet again, not on
+  its chest armour.
+- Weapon enchantment glows stay on the blade instead of trailing far behind a swinging sword.
+- Names no longer peek around building walls when the character behind the wall is hidden.
+- Four campfires that floated above the ground (one in Camelot Hills, among others) sit on the ground.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
