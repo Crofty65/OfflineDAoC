@@ -104,6 +104,12 @@ The newest version is first. For the full detail of every earlier update, see
   with the arms held straight out, while the body is fitted to them with the arms down; the client now fits the body
   the way the original client does. Some other monsters move more cleanly for the same reason, among them the stone
   and wolf dragons, the Dracolich, Soulkeeper, harpies, slugs, beetles, crabs, scorpions and eels.
+- Avalonian, Elf and Sylvan men's feet no longer go through their cloak when they run. Their skeletons give two
+  bones the same name, and the right side of the cloak followed the wrong one, so that panel never swung with the
+  run. The client now picks the same bone the original client does. Dark Elves, Half Orcs, Xaphans, mammoths and some
+  other monsters with the same quirk move more like the original too.
+- Snowdonia Fortress's metal gates (portcullises) open when the levers are pulled. Gates that slide instead of
+  swinging never moved; the other border keep gates, Caer Diogel's bars and two stone halls' portcullises open too.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
