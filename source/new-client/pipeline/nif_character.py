@@ -59,7 +59,9 @@ def node_trs(b):
     r = b.get('rotation')
     rr = np.array([[r[f'm{i}{j}'] for j in (1, 2, 3)] for i in (1, 2, 3)]) if r is not None else np.identity(3)
     q = quat_from_matrix(rr.T)
-    return np.array([t['x'], t['y'], t['z']]), q / np.linalg.norm(q), float(b.get('scale', 1.0))
+    # NaN read as 0: dr_xaphan.nif's second 'Bip01 R / L Shield' nodes hold NaN translations (written as NaN the glTF
+    # would not load)
+    return np.nan_to_num(np.array([t['x'], t['y'], t['z']], float)), q / np.linalg.norm(q), float(b.get('scale', 1.0))
 
 
 def animation_tables():
@@ -406,6 +408,17 @@ def bind_distortion(sp, nif, by_name, parts, world, bind, tracks):
     return float(np.mean(np.concatenate(errs))) if errs else 0.0
 
 
+def nodes_by_name(nif, index):
+    """{name: NiNode}, the first of a name in tree order - the node the client's name lookup finds (a depth-first
+    search) when a skeleton names two alike (ava_m_skeleton.nif: 'R Cloak Control01' and, misnamed, its child -
+    the run's track went to the child, the right cloak panel's own control never moved and the legs went through
+    it; owner 2026-10-20)."""
+    out = {}
+    for b in sorted((b for b in nif.blocks if b.type == 'NiNode' and id(b) in index), key=lambda b: index[id(b)]):
+        out.setdefault(b.get('name'), b)
+    return out
+
+
 def build(model, parts, clips, out_path, texture_uri, file_bind=False):
     """parts: {node name[@uvset]: texture basename}; clips: {glTF animation name: kfa file}. file_bind: skin by the NIF's
     skin data where its bones were saved out of the skinned pose (see below)."""
@@ -420,7 +433,7 @@ def build(model, parts, clips, out_path, texture_uri, file_bind=False):
 
     def add_node(b, parent_idx, parent_m):
         t, q, s = node_trs(b)
-        local = nif_static.local_matrix(b)                 # row-vector matrix for bind-pose maths
+        local = np.nan_to_num(nif_static.local_matrix(b))  # row-vector matrix for bind-pose maths (NaN: node_trs)
         m = local @ parent_m
         i = len(d.g['nodes'])
         d.g['nodes'].append({'name': b.get('name') or f'node{i}', 'translation': t.tolist(), 'rotation': q.tolist(),
@@ -435,7 +448,7 @@ def build(model, parts, clips, out_path, texture_uri, file_bind=False):
     for r in nif.roots:
         if r is not None and r.type == 'NiNode':
             add_node(r, 0, np.identity(4))
-    by_name = {b.get('name'): b for b in nif.blocks if b.type == 'NiNode'}
+    by_name = nodes_by_name(nif, index)
     skeleton = [b for b in nif.blocks if b.type == 'NiNode' and (b.get('name') or '').startswith('Bip01')]
     # some monsters skin to helper bones outside Bip01 (Beetle: 'Dummy Head'): every skin bone is a joint too
     for b in nif.blocks:
@@ -635,7 +648,7 @@ def build_cata(skeleton, part_list, clips, out_path, texture_uri):
     for r in sk.roots:
         if r is not None and r.type == 'NiNode':
             add_node(r, 0, np.identity(4))
-    by_name = {b.get('name'): b for b in sk.blocks if b.type == 'NiNode'}
+    by_name = nodes_by_name(sk, index)
     skeleton_nodes = [b for b in sk.blocks if b.type == 'NiNode' and (b.get('name') or '').startswith('Bip01')]
     joint_of = {b.get('name'): k for k, b in enumerate(skeleton_nodes)}
     ibm = np.stack([np.linalg.inv(world[id(b)]) for b in skeleton_nodes]).astype(np.float32)
