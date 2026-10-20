@@ -84,6 +84,10 @@ The newest version is first. For the full detail of every earlier update, see
 - Weapon enchantment glows stay on the blade instead of trailing far behind a swinging sword.
 - Names no longer peek around building walls when the character behind the wall is hidden.
 - Four campfires that floated above the ground (one in Camelot Hills, among others) sit on the ground.
+- The Crafted Keeper's arms no longer stretch into long thin strands when it moves. Its model file keeps its bones
+  with the arms held straight out, while the body is fitted to them with the arms down; the client now fits the body
+  the way the original client does. Some other monsters move more cleanly for the same reason, among them the stone
+  and wolf dragons, the Dracolich, Soulkeeper, harpies, slugs, beetles, crabs, scorpions and eels.
 
 ## 0.37 / 0.37b / 0.37c — 2026-10-18
 
