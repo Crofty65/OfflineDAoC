@@ -34,6 +34,11 @@ The newest version is first. For the full detail of every earlier update, see
 - The Huntsmen and Woodsmen of Campacorentin Forest patrol the roads in pairs again instead of standing still. Period
   sightings show a Huntsman and a Woodsman together all along the forest's main roads; each Huntsman now walks one
   stretch of road up and down with a Woodsman at his side, along the same road the horse routes take.
+- Helmets that showed nothing on the head now look like a normal helm. Fifteen helmet looks have no head model in the
+  game client at all, so the client drew nothing when one was worn; the commonest was the Albion cloth cap (most random
+  Albion cloth caps rolled it), along with crowns, circlets, a leather cap and the Dragonsworn full helms. Every such
+  helmet now uses its realm's usual helm for its armour type (Albion cloth caps the plain Albion cloth helm), random
+  helmets no longer roll them, and the ones already in the game were changed.
 
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
