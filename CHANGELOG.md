@@ -55,6 +55,10 @@ The newest version is first. For the full detail of every earlier update, see
   Albion cloth caps rolled it), along with crowns, circlets, a leather cap and the Dragonsworn full helms. Every such
   helmet now uses its realm's usual helm for its armour type (Albion cloth caps the plain Albion cloth helm), random
   helmets no longer roll them, and the ones already in the game were changed.
+- A door the server has no record of opens again when you use it. Such a door is opened by a stand-in that the
+  server makes on the spot, but the stand-in started out already open, so opening it changed nothing and the
+  door stayed shut. The server log now also names any door it doesn't know (DOOR_NOT_IN_DATABASE), so missing
+  ones can be found and added.
 
 **The new client (0.38c)**
 - A monster or NPC that dies stops attacking at once. It sometimes went on swinging for a second or two over its
